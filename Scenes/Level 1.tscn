@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://e3cu0lejh8fi"]
+[gd_scene load_steps=8 format=3 uid="uid://e3cu0lejh8fi"]
 
 [ext_resource type="TileSet" uid="uid://kvcv58f1xa7h" path="res://Assets/Spritemap.tres" id="1_r31sx"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_6nsmh"]
 [ext_resource type="Texture2D" uid="uid://bqb4j84403j2a" path="res://Assets/Sprites/Characters/character_0000.png" id="2_sd2fr"]
+[ext_resource type="Texture2D" uid="uid://dpfw6ck4mow1p" path="res://Assets/Sprites/Characters/character_0024.png" id="4_7sjw3"]
+[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="4_ijuj1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gtoy1"]
 height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lwbui"]
 
 [node name="Main" type="Node2D"]
 
@@ -14,7 +18,7 @@ tile_set = ExtResource("1_r31sx")
 format = 2
 layer_0/tile_data = PackedInt32Array(-1, 131072, 0, -65536, 131072, 0, -65533, 131072, 0, -65535, 131072, 0, -65534, 131072, 0, -131066, 851968, 6, -131067, 786432, 6, -131065, 917504, 6)
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
 script = ExtResource("2_6nsmh")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -27,3 +31,18 @@ texture = ExtResource("2_sd2fr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(32, -30)
 shape = SubResource("CapsuleShape2D_gtoy1")
+
+[node name="Enemy" type="Area2D" parent="." groups=["Enemy"]]
+position = Vector2(63, -35)
+script = ExtResource("4_ijuj1")
+Speed = 100.0
+Direction = Vector2(2.08165e-12, -50)
+
+[node name="Character0024" type="Sprite2D" parent="Enemy"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("4_7sjw3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("CircleShape2D_lwbui")
+
+[connection signal="body_entered" from="Enemy" to="Enemy" method="_on_body_entered"]

@@ -33,7 +33,7 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         GetTree().ReloadCurrentScene();
     }
