@@ -36,11 +36,11 @@ public partial class Enemy : Area2D
 		}
 	}
 
-	private void _on_body_entered(Player body)
+	private void _on_body_entered(Node2D body)
 	{
-		if (body.IsInGroup("Player"))
+		if (body.IsInGroup("Player") && body is Player player)
 		{
-			body.GameOver();
+			player.GameOver();
 		}
 	}
 }

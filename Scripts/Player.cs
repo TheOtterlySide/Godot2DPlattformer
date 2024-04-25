@@ -7,6 +7,12 @@ public partial class Player : CharacterBody2D
     private float JumpForce = 200f;
     private float Gravity = 500f;
 
+    private Vector2 StartPos;
+    public override void _Ready()
+    {
+        StartPos = GlobalPosition;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         Vector2 velocity = Velocity;
@@ -35,7 +41,8 @@ public partial class Player : CharacterBody2D
 
     public void GameOver()
     {
-        GetTree().ReloadCurrentScene();
+        GlobalPosition = StartPos;
+        GetTree().CallDeferred("reload_current_scene");
     }
 }
 
