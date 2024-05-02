@@ -7,6 +7,8 @@ public partial class Player : CharacterBody2D
     private float JumpForce = 200f;
     private float Gravity = 500f;
 
+    private int Score;
+
     private Vector2 StartPos;
     public override void _Ready()
     {
@@ -43,6 +45,11 @@ public partial class Player : CharacterBody2D
     {
         GlobalPosition = StartPos;
         GetTree().CallDeferred("reload_current_scene");
+    }
+
+    public void AddScore(int amount)
+    {
+        Score += amount;
     }
 }
 
