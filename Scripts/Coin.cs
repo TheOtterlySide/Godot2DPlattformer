@@ -5,22 +5,35 @@ using System;
 public partial class Coin : Area2D
 {
 	// Called when the node enters the scene tree for the first time.
+	[Export]
+	private float Bob_height;
+	[Export]
+	private float Bob_speed;
 
-	private float Bob_height = 0.5f;
-	private float Bob_speed = 2f;
 
-	private float Start_Y;
-	private float Start_X;
+	private Vector2 DestinationPos;
+	private Vector2 StartPos;
 	public override void _Ready()
 	{
-		Start_Y = GlobalPosition.Y;
-		Start_X = GlobalPosition.X;
+		StartPos = GlobalPosition;
+		DestinationPos = new Vector2(StartPos.X, StartPos.Y + Bob_height);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		float d = (float)(Mathf.Sin(delta * Bob_speed) + 1) / 2;
-		Position = new Vector2(Start_X,Start_Y + (d * Bob_height));
+		GlobalPosition = GlobalPosition.MoveToward(DestinationPos, Bob_speed * (float)delta);
+
+		if (GlobalPosition == DestinationPos)
+		{
+			if (GlobalPosition == StartPos)
+			{
+				DestinationPos = new Vector2(StartPos.X, StartPos.Y + Bob_height);
+			}
+			else
+			{
+				DestinationPos = StartPos;
+			}
+		}
 	}
 }
