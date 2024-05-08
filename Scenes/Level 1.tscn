@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://e3cu0lejh8fi"]
+[gd_scene load_steps=11 format=3 uid="uid://e3cu0lejh8fi"]
 
 [ext_resource type="TileSet" uid="uid://kvcv58f1xa7h" path="res://Assets/Spritemap.tres" id="1_r31sx"]
 [ext_resource type="PackedScene" uid="uid://cxejwfykwdlou" path="res://Scenes/Player.tscn" id="2_pneah"]
@@ -6,9 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://c5mkddoo2nnmq" path="res://spike.tscn" id="4_8rdc5"]
 [ext_resource type="Script" path="res://Scripts/Coin.cs" id="5_aj7ng"]
 [ext_resource type="Texture2D" uid="uid://ydbe1tyhvygu" path="res://Assets/Sprites/Objects/tile_0151.png" id="6_3dr7j"]
+[ext_resource type="Texture2D" uid="uid://cop47aoytyxtb" path="res://Assets/Sprites/Objects/tile_0112.png" id="7_a4x8t"]
+[ext_resource type="Script" path="res://Scripts/Ending.cs" id="7_hhouy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_urisu"]
 radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8av1"]
+size = Vector2(18, 18)
 
 [node name="Main" type="Node2D"]
 
@@ -36,4 +41,16 @@ texture = ExtResource("6_3dr7j")
 position = Vector2(0, 0.349998)
 shape = SubResource("CircleShape2D_urisu")
 
+[node name="Flag" type="Area2D" parent="."]
+position = Vector2(98, -42)
+script = ExtResource("7_hhouy")
+LevelScene = "res://Scenes/Level 1.tscn"
+
+[node name="Sprite2D" type="Sprite2D" parent="Flag"]
+texture = ExtResource("7_a4x8t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flag"]
+shape = SubResource("RectangleShape2D_g8av1")
+
 [connection signal="body_entered" from="Coin" to="Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="Flag" to="Flag" method="_on_body_entered"]

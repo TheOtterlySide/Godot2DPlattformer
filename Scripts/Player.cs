@@ -10,9 +10,11 @@ public partial class Player : CharacterBody2D
     private int Score;
 
     private Vector2 StartPos;
+    private Label Score_Text;
     public override void _Ready()
     {
         StartPos = GlobalPosition;
+        Score_Text = GetNode("CanvasLayer/ScoreText") as Label;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -50,7 +52,7 @@ public partial class Player : CharacterBody2D
     public void AddScore(int amount)
     {
         Score += amount;
-        GD.Print(Score);
+        Score_Text.Text = $"Score: {Score}";
     }
 }
 

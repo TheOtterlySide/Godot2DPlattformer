@@ -41,7 +41,6 @@ public partial class Coin : Area2D
 	{
 		if (body.IsInGroup("Player") && body is Player player)
 		{
-			GD.Print("HIT");
 			player.AddScore(1);
 			QueueFree();
 		}
