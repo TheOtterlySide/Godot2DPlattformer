@@ -23,15 +23,17 @@ layer_0/tile_data = PackedInt32Array(-1, 131072, 0, -65536, 131072, 0, -65533, 1
 
 [node name="Spike" parent="." instance=ExtResource("4_8rdc5")]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Coin" type="Area2D" parent="."]
 position = Vector2(10, -43.35)
 script = ExtResource("5_aj7ng")
 Bob_height = 2.0
 Bob_speed = 5.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Coin"]
 texture = ExtResource("6_3dr7j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin"]
 position = Vector2(0, 0.349998)
 shape = SubResource("CircleShape2D_urisu")
+
+[connection signal="body_entered" from="Coin" to="Coin" method="_on_body_entered"]

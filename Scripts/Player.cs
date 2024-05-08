@@ -50,6 +50,7 @@ public partial class Player : CharacterBody2D
     public void AddScore(int amount)
     {
         Score += amount;
+        GD.Print(Score);
     }
 }
 

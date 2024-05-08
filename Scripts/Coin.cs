@@ -36,4 +36,14 @@ public partial class Coin : Area2D
 			}
 		}
 	}
+
+	private void _on_body_entered(Node2D body)
+	{
+		if (body.IsInGroup("Player") && body is Player player)
+		{
+			GD.Print("HIT");
+			player.AddScore(1);
+			QueueFree();
+		}
+	}
 }
